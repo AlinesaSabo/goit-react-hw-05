@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { fitchMovies } from "../../services/api";
 import { Link } from "react-router-dom";
 
-const MovieReviews = () => {
+const MovieList = () => {
   const [movies, setMovies] = useState([]);
   useEffect(() => {
     const getAllMovies = async () => {
@@ -27,4 +27,4 @@ const MovieReviews = () => {
     </div>
   );
 };
-export default MovieReviews;
+export default MovieList;
