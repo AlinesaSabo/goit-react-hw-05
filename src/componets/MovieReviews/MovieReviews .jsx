@@ -1,30 +1,24 @@
-import { useEffect, useState } from "react";
-import { fitchMovies } from "../../services/api";
-import { Link } from "react-router-dom";
+import { useParams } from "react-router-dom";
+import { fetchMoviesIdReviews } from "../../services/api";
+import { useHttp } from "../../hooks/useHttp";
 
 const MovieReviews = () => {
-  const [movies, setMovies] = useState([]);
-  useEffect(() => {
-    const getAllMovies = async () => {
-      const data = await fitchMovies();
-      setMovies(data);
-    };
-    getAllMovies();
-  }, []);
+  const { movieId } = useParams();
+
+  const [reviews] = useHttp(fetchMoviesIdReviews, movieId);
 
   return (
     <div>
-      <h2>Trending today</h2>
       <ul>
-        {movies.map((movie) => (
-          <li key={movie.id}>
-            <Link to={movie.id.toString()}>
-              <p>{movie.title}</p>
-            </Link>
+        {reviews?.map((review) => (
+          <li key={review.id}>
+            <h2>Author: {review.author}</h2>
+            <p>{review.content}</p>
           </li>
         ))}
       </ul>
     </div>
   );
 };
+
 export default MovieReviews;
