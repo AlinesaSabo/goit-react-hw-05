@@ -1,9 +1,14 @@
-import MovieList from "../../componets/MoveList/MovieList";
+import MovieList from "../../componets/MovieList/MovieList";
+import { useHttp } from "../../hooks/useHttp";
+import { fetchMovies } from "../../services/api";
 
 const HomePage = () => {
+  const [movies] = useHttp(fetchMovies);
+
   return (
     <div>
-      <MovieList />
+      <h2>Trending today</h2>
+      <MovieList movies={movies} />
     </div>
   );
 };

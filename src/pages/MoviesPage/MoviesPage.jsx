@@ -1,18 +1,16 @@
-import { useMemo, useState } from "react";
-import MovieList from "../../componets/MoveList/MovieList";
+import { useMemo } from "react";
+import MovieList from "../../componets/MovieList/MovieList";
 import { useSearchParams } from "react-router-dom";
 import { Field, Form, Formik } from "formik";
+import { useHttp } from "../../hooks/useHttp";
+import { fetchMoviesSearch } from "../../services/api";
 
 const MoviesPage = () => {
-  const [movies, setMovies] = useState([]);
   const [searchParams, setSearchParams] = useSearchParams();
-  const query = searchParams.get("query") ?? " ";
+  const query = searchParams.get("query") ?? "";
+  const [movies] = useHttp(fetchMoviesSearch, query);
 
-  const initialValues = {
-    query: "",
-  };
-
-  const heandleChangeQuery = (newQuery) => {
+  const handleChangeQuery = (newQuery) => {
     if (!newQuery) {
       return setSearchParams({});
     }
@@ -22,24 +20,28 @@ const MoviesPage = () => {
 
   const filterData = useMemo(
     () =>
-      movies.filter((movie) =>
-        movie.title.toLowerCasa().includes(query.toLowerCase())
-      ),
+      movies?.filter((movie) =>
+        movie.title.toLowerCase().includes(query.toLowerCase())
+      ) || [],
     [movies, query]
   );
 
+  const handleSubmit = (values, { resetForm }) => {
+    handleChangeQuery(values.query);
+    resetForm();
+  };
+
   return (
     <div>
-      <Formik
-        initialValues={initialValues}
-        heandleChangeQuery={heandleChangeQuery}
-      >
+      <Formik initialValues={{ query: "" }} onSubmit={handleSubmit}>
         <Form>
           <Field name="query" />
           <button type="submit">Search</button>
         </Form>
       </Formik>
-      {movies.length > 0 && <MovieList movies={filterData} />}
+      {Array.isArray(movies) && movies.length > 0 && (
+        <MovieList movies={filterData} />
+      )}
     </div>
   );
 };

@@ -1,17 +1,10 @@
-import { fetchMovies } from "../../services/api";
 import { Link, useLocation } from "react-router-dom";
-import { useHttp } from "../../hooks/useHttp";
 
-const MovieList = () => {
+const MovieList = ({ movies }) => {
   const location = useLocation();
-
-  const [movies] = useHttp(fetchMovies);
-
-  console.log(movies);
 
   return (
     <div>
-      <h2>Trending today</h2>
       <ul>
         {movies?.map((movie) => (
           <li key={movie.id}>

@@ -9,8 +9,6 @@ const MovieCast = () => {
   const defaultImg =
     "https://dummyimage.com/200x300/cdcdcd/000.jpg&text=No+photo";
 
-  console.log(credits);
-
   if (!credits) return <h2>Loading...</h2>;
 
   if (!credits?.length) {
