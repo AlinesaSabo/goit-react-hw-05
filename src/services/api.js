@@ -10,7 +10,7 @@ export const fitchMovies = async () => {
   return response.data.results;
 };
 
-export const fitchMoviesId = async () => {
-  const response = await axios.get(`/trending/movie/day/${moviesId}`);
-  return response.data.results;
+export const fitchMoviesId = async (movieId) => {
+  const response = await axios.get(`/movie/${movieId}`);
+  return response.data;
 };
