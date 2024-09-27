@@ -4,7 +4,7 @@ import Navigation from "./componets/Navigation/Navigation";
 import MoviesPage from "./pages/MoviesPage/MoviesPage";
 import NotFound from "./pages/NotFoundPage/NotFoundPage";
 import MovieDetailsPage from "./pages/MovieDetailsPage/MovieDetailsPage";
-import MovieReviews from "./componets/MovieReviews/MovieReviews ";
+import MovieReviews from "./componets/MovieReviews/MovieReviews";
 import MovieCast from "./componets/MovieCast/MovieCast";
 
 const App = () => {

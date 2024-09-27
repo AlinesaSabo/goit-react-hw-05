@@ -7,6 +7,8 @@ const MovieList = () => {
 
   const [movies] = useHttp(fetchMovies);
 
+  console.log(movies);
+
   return (
     <div>
       <h2>Trending today</h2>
