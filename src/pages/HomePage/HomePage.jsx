@@ -1,4 +1,4 @@
-import MovieList from "../../componets/MovieList/MovieList";
+import MovieList from "../../components/MovieList/MovieList";
 import { useHttp } from "../../hooks/useHttp";
 import { fetchMovies } from "../../services/api";
 

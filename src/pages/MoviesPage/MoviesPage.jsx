@@ -1,5 +1,5 @@
 import { useMemo } from "react";
-import MovieList from "../../componets/MovieList/MovieList";
+import MovieList from "../../components/MovieList/MovieList";
 import { useSearchParams } from "react-router-dom";
 import { Field, Form, Formik } from "formik";
 import { useHttp } from "../../hooks/useHttp";

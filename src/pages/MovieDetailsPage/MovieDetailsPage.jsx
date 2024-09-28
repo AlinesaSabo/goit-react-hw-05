@@ -8,6 +8,7 @@ import {
 } from "react-router-dom";
 import { fetchMoviesId } from "../../services/api";
 import { useHttp } from "../../hooks/useHttp";
+import s from "./MovieDetailsPage.module.css";
 
 const MovieDetailsPage = () => {
   const { movieId } = useParams();
@@ -23,26 +24,28 @@ const MovieDetailsPage = () => {
   return (
     <div>
       <Link to={goBack.current}>Go back</Link>
-      <div>
-        <img
-          src={
-            movies.poster_path
-              ? `https://image.tmdb.org/t/p/w500/${movies.poster_path}`
-              : defaultImg
-          }
-          width={250}
-          alt="poster"
-        />
-      </div>
-      <div>
-        <h2>
-          {movies.title} ({movies.release_date.slice(0, 4)})
-        </h2>
-        <p>User Score: {movies.popularity}%</p>
-        <h3>Overview</h3>
-        <p>{movies.overview}</p>
-        <h3>Genres</h3>
-        <p>{movies.genres.map((genre) => genre.name).join(", ")}</p>
+      <div className={s.wrapper}>
+        <div>
+          <img
+            src={
+              movies.poster_path
+                ? `https://image.tmdb.org/t/p/w500/${movies.poster_path}`
+                : defaultImg
+            }
+            width={250}
+            alt="poster"
+          />
+        </div>
+        <div>
+          <h2>
+            {movies.title} ({movies.release_date.slice(0, 4)})
+          </h2>
+          <p>User Score: {movies.popularity}%</p>
+          <h3>Overview</h3>
+          <p>{movies.overview}</p>
+          <h3>Genres</h3>
+          <p>{movies.genres.map((genre) => genre.name).join(", ")}</p>
+        </div>
       </div>
       <div>
         <p>Additional information</p>
@@ -55,6 +58,7 @@ const MovieDetailsPage = () => {
           </li>
         </ul>
       </div>
+
       <Suspense fallback={<h2>Loading...</h2>}>
         <Outlet />
       </Suspense>
